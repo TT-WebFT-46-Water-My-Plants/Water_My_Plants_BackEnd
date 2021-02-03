@@ -1,4 +1,9 @@
 package com.lambdaschool.foundation.services;
 
-public class PlantService {
+import com.lambdaschool.foundation.models.Plant;
+
+import java.util.List;
+
+public interface PlantService {
+    List<Plant> findAll();
 }
