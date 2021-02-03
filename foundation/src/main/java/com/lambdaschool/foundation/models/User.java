@@ -78,7 +78,7 @@ public class User
     orphanRemoval = true)
     @JsonIgnoreProperties(value = "user",
     allowSetters = true)
-    private Set<UserPlant> plants = new HashSet<>();
+    private Set<UserPlants> plants = new HashSet<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -235,11 +235,11 @@ public class User
         this.roles = roles;
     }
 
-    public Set<UserPlant> getPlants() {
+    public Set<UserPlants> getPlants() {
         return plants;
     }
 
-    public void setPlants(Set<UserPlant> plants) {
+    public void setPlants(Set<UserPlants> plants) {
         this.plants = plants;
     }
 

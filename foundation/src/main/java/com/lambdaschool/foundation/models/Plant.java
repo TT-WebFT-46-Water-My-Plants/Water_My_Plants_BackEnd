@@ -33,7 +33,7 @@ public class Plant extends Auditable {
     orphanRemoval = true)
     @JsonIgnoreProperties(value = "plant",
     allowSetters = true)
-    private Set<UserPlant> users = new HashSet<>();
+    private Set<UserPlants> users = new HashSet<>();
 
 
     public Plant() {
@@ -79,11 +79,11 @@ public class Plant extends Auditable {
         this.h2oFrequency = h2oFrequency;
     }
 
-    public Set<UserPlant> getUsers() {
+    public Set<UserPlants> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserPlant> users) {
+    public void setUsers(Set<UserPlants> users) {
         this.users = users;
     }
 }

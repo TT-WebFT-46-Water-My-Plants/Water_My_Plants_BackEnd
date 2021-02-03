@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "userplants")
 @IdClass(UserPlantsId.class)
-public class UserPlant extends Auditable implements Serializable {
+public class UserPlants extends Auditable implements Serializable {
 
     @Id
     @ManyToOne
@@ -28,7 +28,7 @@ public class UserPlant extends Auditable implements Serializable {
             allowSetters = true)
     private Plant plant;
 
-    public UserPlant() {
+    public UserPlants() {
     }
 
     public User getUser() {
@@ -51,10 +51,10 @@ public class UserPlant extends Auditable implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
 
-        if(!(o instanceof UserPlant)) {
+        if(!(o instanceof UserPlants)) {
             return false;
         }
-        UserPlant that = (UserPlant) o;
+        UserPlants that = (UserPlants) o;
 
         return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 :
         that.user.getUserid()) &&
