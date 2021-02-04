@@ -2,16 +2,19 @@ package com.lambdaschool.foundation.controllers;
 
 
 import com.lambdaschool.foundation.models.Plant;
+import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.services.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,5 +33,29 @@ public class PlantController {
         .getAuthentication().getName());
 
         return new ResponseEntity<>(myPlants, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/plant",
+            consumes = "application/json")
+    public ResponseEntity<?> addNewPlant(
+            @Valid
+            @RequestBody
+                    Plant newPlant)
+    {
+        // ids are not recognized by the Post method
+        newPlant.setPlantid(0);
+        newPlant = plantService.save(newPlant);
+
+        // set the location header for the newly created resource
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newPlantURI = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{plantid}")
+                .buildAndExpand(newPlant.getPlantid())
+                .toUri();
+        responseHeaders.setLocation(newPlantURI);
+
+        return new ResponseEntity<>(null,
+                responseHeaders,
+                HttpStatus.CREATED);
     }
 }

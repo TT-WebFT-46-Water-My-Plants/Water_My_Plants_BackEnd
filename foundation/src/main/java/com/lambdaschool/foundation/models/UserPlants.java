@@ -31,6 +31,11 @@ public class UserPlants extends Auditable implements Serializable {
     public UserPlants() {
     }
 
+    public UserPlants(@NotNull User user, @NotNull Plant plant) {
+        this.user = user;
+        this.plant = plant;
+    }
+
     public User getUser() {
         return user;
     }

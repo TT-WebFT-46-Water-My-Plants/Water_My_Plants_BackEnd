@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PlantService {
     List<Plant> findAll();
+
+    Plant save(Plant plant);
 }

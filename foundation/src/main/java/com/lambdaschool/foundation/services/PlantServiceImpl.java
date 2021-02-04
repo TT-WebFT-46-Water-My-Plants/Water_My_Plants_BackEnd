@@ -1,6 +1,7 @@
 package com.lambdaschool.foundation.services;
 
 
+import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Plant;
 import com.lambdaschool.foundation.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,6 @@ public class PlantServiceImpl implements PlantService{
     @Autowired
     private PlantRepository plantrepos;
 
-    @Autowired
-    private PlantService plantService;
-
-    @Autowired
-    private HelperFunctions helperFunctions;
 
     @Override
     public List<Plant> findAll() {
@@ -29,5 +25,16 @@ public class PlantServiceImpl implements PlantService{
 
         plantrepos.findAll().iterator().forEachRemaining(list::add);
         return list;
+    }
+
+    @Override
+    public Plant save(Plant plant) {
+        if (plant.getUsers()
+        .size() > 0 )
+        {
+            throw new ResourceNotFoundException("Users Plants was not Updated.");
+        }
+        return plantrepos.save(plant);
+
     }
 }
