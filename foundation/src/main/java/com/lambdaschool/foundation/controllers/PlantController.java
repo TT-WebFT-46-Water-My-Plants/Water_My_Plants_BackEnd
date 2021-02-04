@@ -23,17 +23,6 @@ public class PlantController {
     @Autowired
     private PlantService plantService;
 
-//    @PreAuthorize("hasAnyRole('ADMIN')")
-//    @GetMapping(value = "/plants",
-//            produces = "application/json")
-//            public ResponseEntity<?> listAllPlants(){
-//        List<Plant> myPlants = plantService.findAll();
-//
-//        System.out.println(SecurityContextHolder.getContext()
-//        .getAuthentication().getName());
-//
-//        return new ResponseEntity<>(myPlants, HttpStatus.OK);
-//    }
 
     @GetMapping(value = "/plants",
             produces = "application/json")
@@ -50,7 +39,6 @@ public class PlantController {
         Plant p = plantService.findPlantById(plantId);
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
-
 
     @PostMapping(value = "/plant",
             consumes = "application/json")
@@ -74,5 +62,16 @@ public class PlantController {
         return new ResponseEntity<>(null,
                 responseHeaders,
                 HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/plant/{plantid}",
+    consumes = {"application/json"})
+    public ResponseEntity<?> putUpdatePlant(
+            @PathVariable long plantid,
+            @Valid
+            @RequestBody Plant newPlant)
+    {
+        newPlant = plantService.update(plantid, newPlant);
+                return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -10,4 +10,8 @@ public interface PlantService {
     Plant save(Plant plant);
 
     Plant findPlantById(Long id);
+
+    public void deleteAll();
+
+    Plant update(long plantid, Plant newPlant);
 }

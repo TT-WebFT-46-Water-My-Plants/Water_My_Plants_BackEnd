@@ -18,6 +18,9 @@ public class PlantServiceImpl implements PlantService{
     @Autowired
     private PlantRepository plantrepos;
 
+    @Autowired
+    private UserAuditing userAuditing;
+
 
     @Override
     public List<Plant> findAll() {
@@ -42,5 +45,34 @@ public class PlantServiceImpl implements PlantService{
     public Plant findPlantById(Long id) {
         return plantrepos.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Plant id: " + id + "Not Found!"));
+    }
+
+    @Override
+    public void deleteAll() {
+        plantrepos.deleteAll();
+    }
+
+    @Override
+    public Plant update(long plantid, Plant plant) {
+        if(plant.getNickname() == null)
+        {
+            throw new ResourceNotFoundException("No plant with nickname found to update!");
+        }
+        if(plant.getUsers()
+        .size()>0)
+        {
+            throw new ResourceNotFoundException("User Plant can't be updated through the plant object.");
+        }
+
+        Plant newPlant = findPlantById(plantid);
+
+        plantrepos.updatePlantName(userAuditing.getCurrentAuditor()
+        .get(),
+                plant.getNickname(),
+                plantid,
+                plant.getSpecies(),
+                plant.getH2oFrequency()
+        );
+        return findPlantById(plantid);
     }
 }
