@@ -8,4 +8,6 @@ public interface PlantService {
     List<Plant> findAll();
 
     Plant save(Plant plant);
+
+    Plant findPlantById(Long id);
 }

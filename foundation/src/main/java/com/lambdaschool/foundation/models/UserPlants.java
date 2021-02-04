@@ -2,6 +2,7 @@ package com.lambdaschool.foundation.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Table(name = "userplants")
 @IdClass(UserPlantsId.class)
 public class UserPlants extends Auditable implements Serializable {
+
 
     @Id
     @ManyToOne

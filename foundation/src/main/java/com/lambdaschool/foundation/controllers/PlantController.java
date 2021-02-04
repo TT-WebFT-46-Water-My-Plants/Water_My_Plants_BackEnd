@@ -43,6 +43,14 @@ public class PlantController {
         return new ResponseEntity<>(allPlants,
                 HttpStatus.OK);
     }
+    @GetMapping(value = "/plant/{plantId}",
+    produces = "application/json")
+    public ResponseEntity<?> getPlantById(
+            @PathVariable Long plantId){
+        Plant p = plantService.findPlantById(plantId);
+        return new ResponseEntity<>(p, HttpStatus.OK);
+    }
+
 
     @PostMapping(value = "/plant",
             consumes = "application/json")

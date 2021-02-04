@@ -37,4 +37,10 @@ public class PlantServiceImpl implements PlantService{
         return plantrepos.save(plant);
 
     }
+
+    @Override
+    public Plant findPlantById(Long id) {
+        return plantrepos.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Plant id: " + id + "Not Found!"));
+    }
 }
