@@ -23,16 +23,25 @@ public class PlantController {
     @Autowired
     private PlantService plantService;
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @GetMapping(value = "/plants",
+//            produces = "application/json")
+//            public ResponseEntity<?> listAllPlants(){
+//        List<Plant> myPlants = plantService.findAll();
+//
+//        System.out.println(SecurityContextHolder.getContext()
+//        .getAuthentication().getName());
+//
+//        return new ResponseEntity<>(myPlants, HttpStatus.OK);
+//    }
+
     @GetMapping(value = "/plants",
             produces = "application/json")
-            public ResponseEntity<?> listAllPlants(){
-        List<Plant> myPlants = plantService.findAll();
-
-        System.out.println(SecurityContextHolder.getContext()
-        .getAuthentication().getName());
-
-        return new ResponseEntity<>(myPlants, HttpStatus.OK);
+    public ResponseEntity<?> listPlants()
+    {
+        List<Plant> allPlants = plantService.findAll();
+        return new ResponseEntity<>(allPlants,
+                HttpStatus.OK);
     }
 
     @PostMapping(value = "/plant",

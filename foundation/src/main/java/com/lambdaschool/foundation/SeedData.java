@@ -67,6 +67,9 @@ public class SeedData
         r2 = roleService.save(r2);
         r3 = roleService.save(r3);
 
+        p1 = plantService.save(p1);
+        p2 = plantService.save(p2);
+
         // admin, data, user
         User u1 = new User("admin",
             "password",
